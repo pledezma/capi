@@ -1,0 +1,4 @@
+C:\Users\pledezma\source\repos\capi2.1\capi2.1\obj\Debug\netcoreapp3.0\capi2.1.csprojAssemblyReference.cache
+C:\Users\pledezma\source\repos\capi2.1\capi2.1\obj\Debug\netcoreapp3.0\capi2.1.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\pledezma\source\repos\capi2.1\capi2.1\obj\Debug\netcoreapp3.0\capi2.1.AssemblyInfoInputs.cache
+C:\Users\pledezma\source\repos\capi2.1\capi2.1\obj\Debug\netcoreapp3.0\capi2.1.AssemblyInfo.cs

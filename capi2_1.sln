@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29709.97
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "capi2_1", "capi2.1\capi2_1.csproj", "{8F01A728-4724-4260-9670-A433F8F04019}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CAR_AMI_LIB", "..\CAR_AMI_LIB\CAR_AMI_LIB\CAR_AMI_LIB.csproj", "{1F4860D1-7FFF-4CC8-BD6A-A1A9C271F838}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8F01A728-4724-4260-9670-A433F8F04019}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F01A728-4724-4260-9670-A433F8F04019}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F01A728-4724-4260-9670-A433F8F04019}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F01A728-4724-4260-9670-A433F8F04019}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F4860D1-7FFF-4CC8-BD6A-A1A9C271F838}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F4860D1-7FFF-4CC8-BD6A-A1A9C271F838}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F4860D1-7FFF-4CC8-BD6A-A1A9C271F838}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F4860D1-7FFF-4CC8-BD6A-A1A9C271F838}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8CF3613B-4A96-4BC2-B7E3-927C7051FD19}
+	EndGlobalSection
+EndGlobal
