@@ -9,8 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options; 
 using Hangfire;
 using Hangfire.SqlServer;
 namespace capi2_1
@@ -46,7 +45,9 @@ namespace capi2_1
             // Add the processing server as IHostedService
              services.AddHangfireServer(options =>
             {
-                options.Queues = new[] { "print", "critical", "default", "reconnect_meter", "disconnect_meter", "disconnect_meter_masive", "reconnect_meter_masive" };
+                queue queue = new queue();
+                string[] queues = queue.queues;
+                options.Queues = queues;
             });
 
             // Add framework services.

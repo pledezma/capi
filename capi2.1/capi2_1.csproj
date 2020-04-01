@@ -20,6 +20,8 @@
     <PackageReference Include="System.ServiceModel.Primitives" Version="4.7.0" />
   </ItemGroup>
 
+  
+
   <ItemGroup>
     <ProjectReference Include="..\..\CAR_AMI_LIB\CAR_AMI_LIB\CAR_AMI_LIB.csproj" />
   </ItemGroup>

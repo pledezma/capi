@@ -1,0 +1,9 @@
+C:\Users\TI\Documents\PROYECTOS\AMI\capi2.1\Conexion\bin\Debug\netstandard2.0\db.dll.config
+C:\Users\TI\Documents\PROYECTOS\AMI\capi2.1\Conexion\bin\Debug\netstandard2.0\db.deps.json
+C:\Users\TI\Documents\PROYECTOS\AMI\capi2.1\Conexion\bin\Debug\netstandard2.0\db.dll
+C:\Users\TI\Documents\PROYECTOS\AMI\capi2.1\Conexion\bin\Debug\netstandard2.0\db.pdb
+C:\Users\TI\Documents\PROYECTOS\AMI\capi2.1\Conexion\obj\Debug\netstandard2.0\db.csprojAssemblyReference.cache
+C:\Users\TI\Documents\PROYECTOS\AMI\capi2.1\Conexion\obj\Debug\netstandard2.0\db.AssemblyInfoInputs.cache
+C:\Users\TI\Documents\PROYECTOS\AMI\capi2.1\Conexion\obj\Debug\netstandard2.0\db.AssemblyInfo.cs
+C:\Users\TI\Documents\PROYECTOS\AMI\capi2.1\Conexion\obj\Debug\netstandard2.0\db.dll
+C:\Users\TI\Documents\PROYECTOS\AMI\capi2.1\Conexion\obj\Debug\netstandard2.0\db.pdb
