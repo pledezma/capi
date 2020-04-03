@@ -52,8 +52,7 @@ namespace model
                     SqlCommand cmd = new SqlCommand(item, conectar, transaction);
                     cmd.ExecuteNonQuery();
                 }  
-                transaction.Commit();
-                this.cerrar();
+                transaction.Commit(); 
                 re = true;
             }
             catch (Exception e)
@@ -67,6 +66,7 @@ namespace model
                     
                 }
             }
+            this.cerrar();
             return re;
         }
         public bool cerrar()

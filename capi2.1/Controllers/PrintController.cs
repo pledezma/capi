@@ -31,14 +31,14 @@ namespace capi2_1.Controllers
         [HttpGet("ErrorTest")]
         public ActionResult<string> ErrorTest()
         {
-            string ans = "400";
-            EndpointFailure k = new EndpointFailure();
+          string ans = "400";
+            /*EndpointFailure k = new EndpointFailure();
             Ami_Diagnostic_Service.ReadDisconnectStateByMetersResult readDisconnectStateByMetersResult = new Ami_Diagnostic_Service.ReadDisconnectStateByMetersResult();
             k.convertFailure(readDisconnectStateByMetersResult);
             Ami_Control_Service.EndpointRequestResult endpointRequestResult = new Ami_Control_Service.EndpointRequestResult();
             k.convertFailure(endpointRequestResult);
             Ami_Data_Service.InteractiveReadByEndpointResult interactiveReadByEndpointResult = new Ami_Data_Service.InteractiveReadByEndpointResult();
-            k.convertFailure(interactiveReadByEndpointResult);
+            k.convertFailure(interactiveReadByEndpointResult);*/
             return ans;
         }
 

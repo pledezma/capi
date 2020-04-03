@@ -10,7 +10,7 @@ namespace model
         status varchar(100),
         token varchar(200) ,
         meter varchar(200) ,
-        switchState varchar(10),
+        switchState varchar(100),
         extendedSwitchState varchar(100),
         jsonData text,
         executedDate dateTime

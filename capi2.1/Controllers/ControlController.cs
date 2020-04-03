@@ -134,6 +134,50 @@ namespace capi2_1.Controllers
             
             return ans;
         }
+        [HttpGet("PingByEndpoints/{key}")]
+        public ActionResult<string> PingByEndpoints(string key)
+        {
+            string ans = "400";
+            queue q = new queue();
+            /*string[] meters = null;
+            meters = new string[1];
+            meters[0] = key;*/
+            ans = BackgroundJob.Enqueue(() => q.PingByEndpoints(key));//meters
+            //RecurringJob.AddOrUpdate(() => q.PingByEndpoints(), Cron.Minutely);
+
+            return ans;
+        }
+        [HttpGet("GetPingByEndpointsResult/{token}")]
+        public ActionResult<string> GetPingByEndpointsResult(string token)
+        {
+            string ans = "400";
+            queue q = new queue();
+            ans = BackgroundJob.Enqueue(() => q.GetPingByEndpointsResult(token));
+            //RecurringJob.AddOrUpdate(() => q.GetPingByEndpointsResult(), Cron.Minutely);
+
+            return ans;
+        }
+        [HttpGet("GetPingByEndpointsResultMasive")]
+        public ActionResult<string> GetPingByEndpointsResultMasive()
+        {
+            string ans = "400";
+            queue q = new queue();
+            ans = BackgroundJob.Enqueue(() => q.GetPingByEndpointsResultMasive());
+            //RecurringJob.AddOrUpdate(() => q.GetPingByEndpointsResultMasive(), Cron.Minutely);
+
+            return ans;
+        }
+        [HttpGet("PingByEndpointsMasive")]
+        public ActionResult<string> PingByEndpointsMasive()
+        {
+            string ans = "400";
+            queue q = new queue();
+
+            ans = BackgroundJob.Enqueue(() => q.PingByEndpointsMasive());
+            //RecurringJob.AddOrUpdate(() => q.PingByEndpointsMasive(), Cron.Minutely);
+
+            return ans;
+        }
 
     }
 }

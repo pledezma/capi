@@ -58,7 +58,7 @@ namespace capi2_1.Controllers
                                  
                                 break;
                             case "10":
-                                RecurringJob.RemoveIfExists("queue.InteractiveReadByEndpointResultMasive");
+                                RecurringJob.RemoveIfExists("queue.GetInteractiveReadByEndpointResultMasive");
                                 break;
                             case "11":
                                
@@ -132,7 +132,7 @@ namespace capi2_1.Controllers
                                  
                                 break;
                             case "10":
-                                RecurringJob.AddOrUpdate(() => q.InteractiveReadByEndpointResultMasive(), Cron.Minutely);
+                                RecurringJob.AddOrUpdate(() => q.GetInteractiveReadByEndpointResultMasive(), Cron.Minutely);
                                 break;
                             case "11":
 
@@ -162,7 +162,7 @@ namespace capi2_1.Controllers
 
                                 break;
                             case "all":
-                                RecurringJob.AddOrUpdate(() => q.InteractiveReadByEndpointResultMasive(), Cron.Minutely);
+                                RecurringJob.AddOrUpdate(() => q.GetInteractiveReadByEndpointResultMasive(), Cron.Minutely);
                                 RecurringJob.AddOrUpdate(() => q.GetReconnectMeterResultMasive(), Cron.Minutely);
                                 RecurringJob.AddOrUpdate(() => q.GetDisconnectMeterResultMasive(), Cron.Minutely);
                                 break;

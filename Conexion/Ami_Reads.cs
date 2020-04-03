@@ -36,6 +36,16 @@ namespace model
             }
             return r;
         }
+        public string qInsert()
+        { 
+            string q =
+                "INSERT INTO AMI.dbo.Ami_Reads " +
+                "(fecha_lectura, whd, cod_medidor, whr, whnet, token_result, esn, serialnumber, readjson, token_request, period) " +
+                "VALUES('" + fecha_lectura.ToString("yyyy-MM-dd HH:mm:ss") + "'," + whd + ",'" + cod_medidor + "'," + whr + "," + whnet + ",'" + token_result + "','" + esn + "','" + serialnumber + "','" + readjson + "','" + token_request + "'," + period + "); ";
+
+            
+            return q;
+        }
         public bool transaction(List<string> tranList)
         {
             bool r = false;

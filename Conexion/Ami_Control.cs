@@ -28,7 +28,7 @@ namespace model
             bool r = false;
             string q =
                 "INSERT INTO AMI.dbo.Ami_Control " +
-                "(status, token, meter, jsonData) " +
+                "(status, token, meter, jsonData,executedDate) " +
                 "VALUES( '" + status + "', '"+ token + "', '" + meter + "', '" + jsonData + "', GETDATE()); ";
                 
                 
@@ -44,7 +44,7 @@ namespace model
         { 
             string q =
                 "INSERT INTO AMI.dbo.Ami_Control " +
-                "(status, token, meter, jsonData) " +
+                "(status, token, meter, jsonData,executedDate) " +
                 "VALUES( '" + status + "', '" + token + "', '" + meter + "', '" + jsonData + "', GETDATE()); ";
              
             return q;

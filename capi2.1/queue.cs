@@ -9,6 +9,21 @@ using CAR_AMI_LIB;
  
 namespace capi2_1
 {
+    /*
+     
+         select 
+t.id,t.status,t.token,t.tokenType,t.period,
+c.status ,
+d.status,d.extendedSwitchState,
+r.whd ,r.whnet ,r.whr,
+tf.description ,tf.reason from Ami_Token t 
+left join  Ami_Control c on c.token  = t.token 
+left join Ami_Diagnostic d on d.token =t.token 
+left join Ami_Token_Failure tf on tf.token  = t.token 
+left join Ami_Reads r on r.token_request =t.token 
+where t.meter = 15367 ;
+
+         */
     public class queue
 { 
 
@@ -19,10 +34,10 @@ namespace capi2_1
             "disconnect_meter_masive",
             "get_disconnect_meter_result_masive",
             "get_reconnect_meter_result_masive",
-            "interactive_read_by_endpoint_request",
-            "interactive_read_by_endpoint_result",
-            "interactive_read_by_endpoint_result_masive",
-            "interactive_read_by_endpoint_request_masive",
+            "interactive_read_by_endpoint",
+            "get_interactive_read_by_endpoint_result",
+            "get_interactive_read_by_endpoint_result_masive",
+            "interactive_read_by_endpoint_masive",
             "ping_by_endpoints",
             "get_ping_by_endpoints_result",
             "ping_by_endpoints_masive",
@@ -31,10 +46,15 @@ namespace capi2_1
             "get_read_disconnect_state_by_meters_result",
             "read_disconnect_state_by_meters_masive",
             "get_read_disconnect_state_by_meters_result_masive",
+            "contingency_read_by_endpoints_request",
+            "contingency_read_by_endpoints_request_masive",
+            "interrogate_by_endpoints_request",
+            "interrogate_by_endpoints_request_masive",
             "print"
         };
+           
 
-         
+
         public string[] queuesIds = {
             "ReconnectMeter",
             "DisconnectMeter",
@@ -42,21 +62,25 @@ namespace capi2_1
             "DisconnectMeterMasive",
             "GetDisconnectMeterResultMasive",
             "GetReconnectMeterResultMasive",
-            "InteractiveReadByEndpointRequest",
-            "InteractiveReadByEndpointResult",
-            "InteractiveReadByEndpointRequestMasive",
-            "InteractiveReadByEndpointResultMasive",
+            "InteractiveReadByEndpoint", 
+            "GetInteractiveReadByEndpointResult",
+            "InteractiveReadByEndpointMasive",
+            "GetInteractiveReadByEndpointResultMasive",
             "PingByEndpoints",
             "GetPingByEndpointsResult",
-             "PingByEndpointsMsive",
-              "GetPingByEndpointsResultMasive",
+            "PingByEndpointsMsive",
+            "GetPingByEndpointsResultMasive",
             "GetReadDisconnectStateByMetersResult",
             "ReadDisconnectStateByMeters",
             "GetReadDisconnectStateByMetersResultMasive",
             "ReadDisconnectStateByMetersMasive",
+            "ContingencyReadByEndpoints",
+            "ContingencyReadByEndpointsMasive",
+            "InterrogateByEndpoints",
+            "InterrogateByEndpointsMasive",
             "Print" 
         };
- 
+           
         public bool ba = false;
         /*************************************************************************************************************************************/
         /***********************************************CONTROL           *****************************************************************/
@@ -67,29 +91,20 @@ namespace capi2_1
             bool si = false;
             CAR_AMI_LIB.Ami_Control ami_Control = new CAR_AMI_LIB.Ami_Control();
             si = ami_Control.ReconnectMeter(key);
-            ba = si;
-            Console.WriteLine("aqui");
-
         }
         [Queue("disconnect_meter")]
         public void DisconnectMeter(string key)
         {
             bool si = false;
             CAR_AMI_LIB.Ami_Control ami_Control = new CAR_AMI_LIB.Ami_Control();
-            si = ami_Control.DisconnectMeter(key);
-
-            Console.WriteLine("aqui ");
-
+            si = ami_Control.DisconnectMeter(key); 
         }
         [Queue("reconnect_meter_masive")]
         public void ReconnectMeterMasive()
         {
             bool si = false;
             Ami_Control ami_Control = new CAR_AMI_LIB.Ami_Control();
-            si = ami_Control.ReconnectMeterMasive();//ReconnectMeterMasive(key);
-
-            Console.WriteLine("aqui ");
-
+            si = ami_Control.ReconnectMeterMasive();//ReconnectMeterMasive(key); 
         }
         [Queue("disconnect_meter_masive")]
         public void DisconnectMeterMasive()
@@ -97,29 +112,20 @@ namespace capi2_1
             bool si = false;
             CAR_AMI_LIB.Ami_Control ami_Control = new CAR_AMI_LIB.Ami_Control();
             si = ami_Control.DisconnectMeterMasive();
-
-            Console.WriteLine("aqui ");
-
         }
         [Queue("get_disconnect_meter_result_masive")]
         public void GetDisconnectMeterResultMasive()
         {
             bool si = false;
             CAR_AMI_LIB.Ami_Control ami_Control = new CAR_AMI_LIB.Ami_Control();
-            si = ami_Control.GetDisconnectMeterResultMasive();
-
-            Console.WriteLine("aqui ");
-
+            si = ami_Control.GetDisconnectMeterResultMasive(); 
         }
         [Queue("get_reconnect_meter_result_masive")]
         public void GetReconnectMeterResultMasive()
         {
             bool si = false;
             CAR_AMI_LIB.Ami_Control ami_Control = new CAR_AMI_LIB.Ami_Control();
-            si = ami_Control.GetReconnectMeterResultMasive();
-
-            Console.WriteLine("aqui ");
-
+            si = ami_Control.GetReconnectMeterResultMasive(); 
         }
         [Queue("print")]
         public void Print(string key,string d = null)
@@ -130,83 +136,30 @@ namespace capi2_1
             si = print.print(key,d); 
             Console.WriteLine("aqui "); 
         }
-
-        /*************************************************************************************************************************************/
-        /***********************************************DATA           *****************************************************************/
-        /*************************************************************************************************************************************/
-        [Queue("interactive_read_by_endpoint_request")]
-        public void InteractiveReadByEndpointRequest(string key)
-        {
-            bool si = false;
-            string resultado = "";
-            CAR_AMI_LIB.Ami_Data ami_Data = new CAR_AMI_LIB.Ami_Data();
-            si = ami_Data.InteractiveReadByEndpointRequest(key);
-            //Print(resultado,"token");
-            Console.WriteLine("aqui " + resultado);
-        }
-        [Queue("interactive_read_by_endpoint_result")]
-        public void InteractiveReadByEndpointResult(string token)
-        {
-            string resultado = "";
-            bool si = false;
-            CAR_AMI_LIB.Ami_Data ami_Data = new CAR_AMI_LIB.Ami_Data();
-            si = ami_Data.InteractiveReadByEndpointResult(token);
-            Print(resultado, "lectura");
-            Console.WriteLine("aqui " + resultado);
-        }
-        [Queue("interactive_read_by_endpoint_request_masive")] 
-        public void InteractiveReadByEndpointRequestMasive()
-        {
-            bool si = false;
-            string resultado = "";
-            CAR_AMI_LIB.Ami_Data ami_Data = new CAR_AMI_LIB.Ami_Data();
-            si = ami_Data.InteractiveReadByEndpointRequestMasive();
-            //Print(resultado,"token");
-            Console.WriteLine("aqui " + resultado);
-        }
-        [Queue("interactive_read_by_endpoint_result_masive")]
-        public void InteractiveReadByEndpointResultMasive()
-        {
-            string resultado = "";
-            bool si = false;
-            CAR_AMI_LIB.Ami_Data ami_Data = new CAR_AMI_LIB.Ami_Data();
-            si = ami_Data.InteractiveReadByEndpointResultMasive();
-            Print(resultado, "lectura");
-            Console.WriteLine("aqui " + resultado);
-        }
-        /*************************************************************************************************************************************/
-        /***********************************************DIAGNOSTIC           *****************************************************************/
-        /*************************************************************************************************************************************/
         [Queue("ping_by_endpoints")]
-        public void PingByEndpoints(string[] arrKey)
+        public void PingByEndpoints(string key)//string[] arrKey
         {
             string resultado = "";
             bool si = false;
-            CAR_AMI_LIB.Ami_Diagnostic ami_Diagnostic = new CAR_AMI_LIB.Ami_Diagnostic();
-            si = ami_Diagnostic.PingByEndpoints(arrKey);
-            Print(resultado, "lectura");
-            Console.WriteLine("aqui " + resultado);
+            CAR_AMI_LIB.Ami_Control ami_Control = new CAR_AMI_LIB.Ami_Control();
+            si = ami_Control.PingByEndpoints(key);//arrKey 
         }
         [Queue("ping_by_endpoints_masive")]
         public void PingByEndpointsMasive()
         {
             string resultado = "";
             bool si = false;
-            CAR_AMI_LIB.Ami_Diagnostic ami_Diagnostic = new CAR_AMI_LIB.Ami_Diagnostic();
-            si = ami_Diagnostic.PingByEndpointsMasive();
-            Print(resultado, "lectura");
-            Console.WriteLine("aqui " + resultado);
+            CAR_AMI_LIB.Ami_Control ami_Control = new CAR_AMI_LIB.Ami_Control();
+            si = ami_Control.PingByEndpointsMasive();
         }
         [Queue("get_ping_by_endpoints_result")]
-       
+
         public void GetPingByEndpointsResult(string token)
         {
             string resultado = "";
             bool si = false;
-            CAR_AMI_LIB.Ami_Diagnostic ami_Diagnostic = new CAR_AMI_LIB.Ami_Diagnostic();
-            si = ami_Diagnostic.GetPingByEndpointsResult(token);
-            Print(resultado, "lectura");
-            Console.WriteLine("aqui " + resultado);
+            CAR_AMI_LIB.Ami_Control ami_Control = new CAR_AMI_LIB.Ami_Control();
+            si = ami_Control.GetPingByEndpointsResult(token);
         }
         [Queue("get_ping_by_endpoints_result_masive")]
 
@@ -214,20 +167,87 @@ namespace capi2_1
         {
             string resultado = "";
             bool si = false;
-            CAR_AMI_LIB.Ami_Diagnostic ami_Diagnostic = new CAR_AMI_LIB.Ami_Diagnostic();
-            si = ami_Diagnostic.GetPingByEndpointsResultMasive();
-            Print(resultado, "lectura");
-            Console.WriteLine("aqui " + resultado);
+            CAR_AMI_LIB.Ami_Control ami_Control = new CAR_AMI_LIB.Ami_Control();
+            si = ami_Control.GetPingByEndpointsResultMasive();
         }
+        /*************************************************************************************************************************************/
+        /***********************************************DATA           *****************************************************************/
+        /*************************************************************************************************************************************/
+        [Queue("interactive_read_by_endpoint")]
+        public void InteractiveReadByEndpoint(string key)
+        {
+            bool si = false;
+            string resultado = "";
+            CAR_AMI_LIB.Ami_Data ami_Data = new CAR_AMI_LIB.Ami_Data();
+            si = ami_Data.InteractiveReadByEndpoint(key); 
+        }
+        [Queue("get_interactive_read_by_endpoint_result")]
+        public void GetInteractiveReadByEndpointResult(string token)
+        {
+            string resultado = "";
+            bool si = false;
+            CAR_AMI_LIB.Ami_Data ami_Data = new CAR_AMI_LIB.Ami_Data();
+            si = ami_Data.GetInteractiveReadByEndpointResult(token); 
+        }
+        [Queue("get_interactive_read_by_endpoint_result_masive")] 
+        public void GetInteractiveReadByEndpointResultMasive()
+        {
+            bool si = false;
+            string resultado = "";
+            CAR_AMI_LIB.Ami_Data ami_Data = new CAR_AMI_LIB.Ami_Data();
+            si = ami_Data.GetInteractiveReadByEndpointResultMasive(); 
+        }
+        [Queue("interactive_read_by_endpoint_masive")]
+        public void InteractiveReadByEndpointMasive()
+        {
+            string resultado = "";
+            bool si = false;
+            CAR_AMI_LIB.Ami_Data ami_Data = new CAR_AMI_LIB.Ami_Data();
+            si = ami_Data.InteractiveReadByEndpointMasive(); 
+        }
+        [Queue("contingency_read_by_endpoints")] 
+        public void ContingencyReadByEndpoints(string key)
+        {
+            string resultado = "";
+            bool si = false;
+            CAR_AMI_LIB.Ami_Data ami_Data = new CAR_AMI_LIB.Ami_Data();
+            si = ami_Data.ContingencyReadByEndpoints(key);
+        }
+        [Queue("contingency_read_by_endpoints_masive")]
+        public void ContingencyReadByEndpointsMasive()
+        {
+            string resultado = "";
+            bool si = false;
+            CAR_AMI_LIB.Ami_Data ami_Data = new CAR_AMI_LIB.Ami_Data();
+            si = ami_Data.ContingencyReadByEndpointsMasive();
+        }
+        [Queue("interrogate_by_endpoints")]
+        public void InterrogateByEndpoints(string key)
+        {
+            string resultado = "";
+            bool si = false;
+            CAR_AMI_LIB.Ami_Data ami_Data = new CAR_AMI_LIB.Ami_Data();
+            si = ami_Data.InterrogateByEndpoints(key);
+        }
+        [Queue("interrogate_by_endpoints_masive")]
+        public void InterrogateByEndpointsMasive()
+        {
+            string resultado = "";
+            bool si = false;
+            CAR_AMI_LIB.Ami_Data ami_Data = new CAR_AMI_LIB.Ami_Data();
+            si = ami_Data.InterrogateByEndpointsMasive();
+        }
+        /*************************************************************************************************************************************/
+        /***********************************************DIAGNOSTIC           *****************************************************************/
+        /*************************************************************************************************************************************/
+
         [Queue("get_read_disconnect_state_by_meters_result")] 
         public void GetReadDisconnectStateByMetersResult(string token)
         {
             string resultado = "";
             bool si = false;
             CAR_AMI_LIB.Ami_Diagnostic ami_Diagnostic = new CAR_AMI_LIB.Ami_Diagnostic();
-            si = ami_Diagnostic.GetReadDisconnectStateByMetersResult(token);
-            Print(resultado, "lectura");
-            Console.WriteLine("aqui " + resultado);
+            si = ami_Diagnostic.GetReadDisconnectStateByMetersResult(token); 
         }
         [Queue("get_read_disconnect_state_by_meters_result_masive")]
         public void GetReadDisconnectStateByMetersResultMasive()
@@ -235,19 +255,15 @@ namespace capi2_1
             string resultado = "";
             bool si = false;
             CAR_AMI_LIB.Ami_Diagnostic ami_Diagnostic = new CAR_AMI_LIB.Ami_Diagnostic();
-            si = ami_Diagnostic.GetReadDisconnectStateByMetersResultMasive();
-            Print(resultado, "lectura");
-            Console.WriteLine("aqui " + resultado);
+            si = ami_Diagnostic.GetReadDisconnectStateByMetersResultMasive(); 
         }
         [Queue("read_disconnect_state_by_meters")]
-        public void ReadDisconnectStateByMeters(string[] arrKey)
+        public void ReadDisconnectStateByMeters(string key)//string[] arrKey
         {
             string resultado = "";
             bool si = false;
             CAR_AMI_LIB.Ami_Diagnostic ami_Diagnostic = new CAR_AMI_LIB.Ami_Diagnostic();
-            si = ami_Diagnostic.ReadDisconnectStateByMeters(arrKey);
-            Print(resultado, "lectura");
-            Console.WriteLine("aqui " + resultado);
+            si = ami_Diagnostic.ReadDisconnectStateByMeters(key);//arrKey 
         }
         [Queue("read_disconnect_state_by_meters_masive")]
         public void ReadDisconnectStateByMetersMasive()
@@ -255,9 +271,7 @@ namespace capi2_1
             string resultado = "";
             bool si = false;
             CAR_AMI_LIB.Ami_Diagnostic ami_Diagnostic = new CAR_AMI_LIB.Ami_Diagnostic();
-            si = ami_Diagnostic.ReadDisconnectStateByMetersMasive();
-            Print(resultado, "lectura");
-            Console.WriteLine("aqui " + resultado);
+            si = ami_Diagnostic.ReadDisconnectStateByMetersMasive(); 
         }
 
 

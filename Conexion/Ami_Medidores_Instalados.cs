@@ -51,7 +51,38 @@ namespace model
         public Ami_Medidores_Instalados[] getAllMeters()
         {
             Ami_Medidores_Instalados[] tarr = null;
-            string q = "select top(10)* from Ami_Medidores_Instalados ami order by id desc;";
+            string q = "select top(10)* from Ami_Medidores_Instalados ami order by id desc;"; 
+            
+            tarr = getData(q); ;
+            return tarr;
+        }
+    
+ 
+        public Ami_Medidores_Instalados[] getAllMetersDisconect()
+        {
+            Ami_Medidores_Instalados[] tarr = null;
+            //string q = "select top(10)* from Ami_Medidores_Instalados ami order by id desc;";
+            string q =
+                "SELECT mi.* " +
+                "FROM AMI.dbo.Ami_Medidores_Instalados mi " +
+                "JOIN CAR.dbo.FAC_DetFact det " +
+                "ON mi.COD_MEDIDOR = det.CodMedSoc " +
+                "WHERE (det.IdFact = 225 AND det.Pagado = 'N') and(mi.COD_INTERNO  in ('11208','13194','13378','13518','13519','13718','13731','13752','13758','14002','14004','14438','14472','14562','14584','14669','15567','15579','15629','15644','15662','15688','15744','15835','15884','15885','15887','15942','16076','16179','16335'));"; ;
+            tarr = getData(q); ;
+            return tarr;
+        }
+        public Ami_Medidores_Instalados[] getAllMetersReconect()
+        { 
+        Ami_Medidores_Instalados[] tarr = null;
+            //string q = "select top(10)* from Ami_Medidores_Instalados ami order by id desc;";
+            string q =
+                "SELECT mi.*  " +
+                "FROM AMI.dbo.Ami_Medidores_Instalados mi  " +
+                "JOIN CAR.dbo.FAC_DetFact det  " +
+                "ON mi.COD_MEDIDOR = det.CodMedSoc  " +
+                "JOIN AMI.dbo.Ami_Token tok  " +
+                "ON mi.COD_INTERNO = tok.meter  " +
+                "WHERE det.IdFact = 225 AND det.Pagado = 'S' AND det.FchPago >= 20200401 AND tok.tokenType = 'DisconnectMeter' AND tok.status = 3;  ";
             tarr = getData(q); ;
             return tarr;
         }

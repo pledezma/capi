@@ -22,10 +22,10 @@ namespace capi2_1.Controllers
         {
             string ans = "400";
             queue q = new queue();
-            string[] meters = null;
+            /*string[] meters = null;
             meters = new string[1];
-            meters[0] = key;
-            ans = BackgroundJob.Enqueue(() => q.PingByEndpoints(meters));
+            meters[0] = key;*/
+            ans = BackgroundJob.Enqueue(() => q.PingByEndpoints(key));//meters
             //RecurringJob.AddOrUpdate(() => q.PingByEndpoints(), Cron.Minutely);
 
             return ans;
@@ -45,7 +45,7 @@ namespace capi2_1.Controllers
         {
             string ans = "400";
             queue q = new queue();
-            //ans = BackgroundJob.Enqueue(() => q.GetPingByEndpointsResultMasive());
+            ans = BackgroundJob.Enqueue(() => q.GetPingByEndpointsResultMasive());
             //RecurringJob.AddOrUpdate(() => q.GetPingByEndpointsResultMasive(), Cron.Minutely);
 
             return ans;
@@ -56,7 +56,7 @@ namespace capi2_1.Controllers
             string ans = "400";
             queue q = new queue();
             
-            //ans = BackgroundJob.Enqueue(() => q.PingByEndpointsMasive());
+            ans = BackgroundJob.Enqueue(() => q.PingByEndpointsMasive());
             //RecurringJob.AddOrUpdate(() => q.PingByEndpointsMasive(), Cron.Minutely);
 
             return ans;
@@ -76,10 +76,10 @@ namespace capi2_1.Controllers
         {
             string ans = "400";
             queue q = new queue();
-            string[] meters = null;
+            /*string[] meters = null;
             meters = new string[1];
-            meters[0] = key;
-            ans = BackgroundJob.Enqueue(() => q.ReadDisconnectStateByMeters(meters));
+            meters[0] = key;*/
+            ans = BackgroundJob.Enqueue(() => q.ReadDisconnectStateByMeters(key));//meters
             //RecurringJob.AddOrUpdate(() => q.ReadDisconnectStateByMeters(), Cron.Minutely);
 
             return ans;

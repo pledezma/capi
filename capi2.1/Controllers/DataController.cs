@@ -15,14 +15,14 @@ namespace capi2_1.Controllers
         {
             return View();
         }
-        [HttpGet("InteractiveReadByEndpointRequest/{key}")]
-        public ActionResult<string> InteractiveReadByEndpointRequest(string key)
+        [HttpGet("InteractiveReadByEndpoint/{key}")]
+        public ActionResult<string> InteractiveReadByEndpoint(string key)
         {
             string ans = "400";
             queue q = new queue();
             try
             {
-                ans = BackgroundJob.Enqueue(() => q.InteractiveReadByEndpointRequest(key));
+                ans = BackgroundJob.Enqueue(() => q.InteractiveReadByEndpoint(key));
             }
             catch (Exception)
             {
@@ -31,14 +31,14 @@ namespace capi2_1.Controllers
             }
             return ans;
         }
-        [HttpGet("InteractiveReadByEndpointResult/{token}")]
-        public ActionResult<string> InteractiveReadByEndpointResult(string token)
+        [HttpGet("GetInteractiveReadByEndpointResult/{token}")]
+        public ActionResult<string> GetInteractiveReadByEndpointResult(string token)
         {
             string ans = "400";
             queue q = new queue();
             try
             {
-                ans = BackgroundJob.Enqueue(() => q.InteractiveReadByEndpointResult(token));
+                ans = BackgroundJob.Enqueue(() => q.GetInteractiveReadByEndpointResult(token));
             }
             catch (Exception)
             {
@@ -47,16 +47,16 @@ namespace capi2_1.Controllers
             }
             return ans;
         }
-        [HttpGet("InteractiveReadByEndpointResultMasive")]
-        public ActionResult<string> InteractiveReadByEndpointResultMasive()
+        [HttpGet("GetInteractiveReadByEndpointResultMasive")]
+        public ActionResult<string> GetInteractiveReadByEndpointResultMasive()
         {
             string ans = "400";
             queue q = new queue();
 
             try
             {
-                //ans = BackgroundJob.Enqueue(() => q.InteractiveReadByEndpointResultMasive());
-                RecurringJob.AddOrUpdate(() => q.InteractiveReadByEndpointResultMasive(), Cron.Minutely);
+                ans = BackgroundJob.Enqueue(() => q.GetInteractiveReadByEndpointResultMasive());
+                //RecurringJob.AddOrUpdate(() => q.InteractiveReadByEndpointResultMasive(), Cron.Minutely);
             }
             catch (Exception)
             {
@@ -66,23 +66,75 @@ namespace capi2_1.Controllers
 
             return ans;
         }
-        [HttpGet("InteractiveReadByEndpointRequestMasive")]
-        public ActionResult<string> InteractiveReadByEndpointRequestMasive()
+        [HttpGet("InteractiveReadByEndpointMasive")]
+        public ActionResult<string> InteractiveReadByEndpointMasive()
         {
             string ans = "400";
             queue q = new queue();
-
             try
             {
-                ans = BackgroundJob.Enqueue(() => q.InteractiveReadByEndpointRequestMasive());
+                ans = BackgroundJob.Enqueue(() => q.InteractiveReadByEndpointMasive());
             }
             catch (Exception)
             {
-
-
             }
-
             return ans;
         }
+        [HttpGet("ContingencyReadByEndpoints/{key}")]
+        public ActionResult<string> ContingencyReadByEndpoints(string key)
+        {
+            string ans = "400";
+            queue q = new queue();
+            try
+            {
+                ans = BackgroundJob.Enqueue(() => q.ContingencyReadByEndpoints(key));
+            }
+            catch (Exception)
+            {
+            }
+            return ans;
+        }
+        [HttpGet("ContingencyReadByEndpointsMasive")]
+        public ActionResult<string> ContingencyReadByEndpointsMasive()
+        {
+            string ans = "400";
+            queue q = new queue();
+            try
+            {
+                ans = BackgroundJob.Enqueue(() => q.ContingencyReadByEndpointsMasive()); 
+            }
+            catch (Exception)
+            {
+            }
+            return ans;
+        }
+        [HttpGet("InterrogateByEndpoints/{key}")]
+        public ActionResult<string> InterrogateByEndpoints(string key)
+        {
+            string ans = "400";
+            queue q = new queue();
+            try
+            {
+                ans = BackgroundJob.Enqueue(() => q.InterrogateByEndpoints(key));
+            }
+            catch (Exception)
+            {
+            }
+            return ans;
+        }
+        [HttpGet("InterrogateByEndpointsMasive")]
+        public ActionResult<string> InterrogateByEndpointsMasive()
+        {
+            string ans = "400";
+            queue q = new queue();
+            try
+            {
+                ans = BackgroundJob.Enqueue(() => q.InterrogateByEndpointsMasive());
+            }
+            catch (Exception)
+            {
+            }
+            return ans;
+        } 
     }
 }
